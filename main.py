@@ -29,6 +29,10 @@ class Grocery():
 
 		if action == "Add":
 			self.Add()
+		elif action == "Change":
+			self.Change()
+		elif action == "Delete":
+			self.Delete()
 
 		self.encode(filename)
 
@@ -36,5 +40,14 @@ class Grocery():
 		item = input()
 		name, price = self.decode(item)
 		self.items[name] = price
+
+	def Change(self):
+		item = input()
+		name, price = self.decode(item)
+		self.items[name] = price
+
+	def Delete(self):
+		name = input()
+		del self.items[name]
 
 G = Grocery()
