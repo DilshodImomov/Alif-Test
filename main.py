@@ -13,6 +13,12 @@ class Grocery():
 		price = int(price)
 		return name, price
 
+	def encode(self, filename):
+		file = open(filename, 'w', encoding = 'utf-8')
+		for item in self.items:
+			file.write(item + " - " + str(self.items[item]) + '\n')
+		file.close()
+
 	def read(self):
 		filename, action = map(str, input().split(" "));
 		file = open(filename, 'r', encoding = 'utf-8')
@@ -20,6 +26,15 @@ class Grocery():
 			name, price = self.decode(item);
 			self.items[name] = price
 		file.close()
-		print(self.items)
+
+		if action == "Add":
+			self.Add()
+
+		self.encode(filename)
+
+	def Add(self):
+		item = input()
+		name, price = self.decode(item)
+		self.items[name] = price
 
 G = Grocery()
