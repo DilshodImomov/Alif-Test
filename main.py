@@ -1,5 +1,6 @@
 class Grocery():
 	items = {}
+	Total = 0
 
 	def __init__(self):
 		self.read()
@@ -25,6 +26,7 @@ class Grocery():
 		for item in file:
 			name, price = self.decode(item);
 			self.items[name] = price
+			self.Total += price
 		file.close()
 
 		if action == "Add":
@@ -33,6 +35,8 @@ class Grocery():
 			self.Change()
 		elif action == "Delete":
 			self.Delete()
+		elif action == "Sum":
+			self.Sum()
 
 		self.encode(filename)
 
@@ -40,14 +44,21 @@ class Grocery():
 		item = input()
 		name, price = self.decode(item)
 		self.items[name] = price
+		self.Total += price;
 
 	def Change(self):
 		item = input()
 		name, price = self.decode(item)
+		self.Total -= self.items[name]
 		self.items[name] = price
+		self.Total += price
 
 	def Delete(self):
 		name = input()
+		self.Total -= self.items[name]
 		del self.items[name]
+
+	def Sum(self):
+		print(self.Total)
 
 G = Grocery()
